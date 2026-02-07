@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Quieres ser mi San Valentín?</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --rosa:#ff4d6d;
+  --rosa-claro:#ffe3ea;
+}
+
+*{
+  box-sizing:border-box;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#ff8fab,#ffb3c6);
+  overflow:hidden;
+}
+
+.card{
+  background:var(--rosa-claro);
+  border-radius:25px;
+  padding:25px;
+  width:90%;
+  max-width:400px;
+  text-align:center;
+  box-shadow:0 15px 30px rgba(0,0,0,.2);
+}
+
+h1{
+  color:var(--rosa);
+  margin-bottom:15px;
+  font-weight:900;
+}
+
+.couple-img{
+  width:100%;
+  max-width:180px;
+}
+
+/* BOTONES CENTRADOS */
+.buttons{
+  position:relative;
+  margin-top:20px;
+  display:flex;
+  justify-content:center;
+  gap:20px;
+}
+
+button{
+  padding:12px 25px;
+  border:none;
+  border-radius:30px;
+  font-size:18px;
+  cursor:pointer;
+}
+
+#yes{
+  background:pink;
+  color:white;
+  font-weight:900;
+}
+
+#no{
+  background:#ccc;
+  font-weight:900;
+}
+
+/* TEXTO TE AMO*/
+.love-text{
+  font-size:34px;
+  font-weight:900;
+  color:pink;
+  margin-bottom:15px;
+  display:none;
+}
+
+/* IMAGEN FINAL */
+.final-image{
+  display:none;
+}
+
+.final-image img{
+  width:100%;
+  max-width:250px;
+  border-radius:20px;
+}
+
+/* CORAZONES */
+.heart{
+  position:absolute;
+  font-size:24px;
+  animation:float 5s linear forwards;
+}
+
+@keyframes float{
+  0%{opacity:1; transform:translateY(0);}
+  100%{opacity:0; transform:translateY(-300px) scale(1.8);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1 id="question">¿Quieres ser mi San Valentín?</h1>
+
+  <div class="couple" id="initialImage">
+    <img src="Snoopy besos.gif" class="couple-img">
+  </div>
+
+  <div class="buttons" id="buttons">
+    <button id="yes">Si </button>
+    <button id="no">No </button>
+  </div>
+
+  <div class="love-text" id="loveText">TE AMOOOO ❤️</div>
+
+  <div class="final-image" id="finalImage">
+    <img src="hugging-heart-snoopy.gif" alt="Te amo">
+  </div>
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+
+const loveText = document.getElementById("loveText");
+const finalImage = document.getElementById("finalImage");
+
+const question = document.getElementById("question");
+const buttons = document.getElementById("buttons");
+const initialImage = document.getElementById("initialImage");
+
+// Botón NO se mueve
+noBtn.addEventListener("mouseover", moveNo);
+noBtn.addEventListener("click", moveNo);
+
+function moveNo(){
+  const x = Math.random() * 200 - 100;
+  const y = Math.random() * 60 - 30;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+// Botón SÍ
+yesBtn.addEventListener("click", () => {
+  question.style.display = "none";
+  buttons.style.display = "none";
+  initialImage.style.display = "none";
+
+  loveText.style.display = "block";
+  finalImage.style.display = "block";
+
+  createHearts();
+});
+
+function createHearts(){
+  for(let i=0;i<30;i++){
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.bottom = "0px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),3000);
+  }
+}
+</script>
+
+</body>
+</html>
